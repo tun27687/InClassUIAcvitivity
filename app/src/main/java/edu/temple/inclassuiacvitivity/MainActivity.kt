@@ -1,8 +1,10 @@
 package edu.temple.inclassuiacvitivity
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +18,9 @@ class MainActivity : AppCompatActivity() {
 
         // Step 1: Populate array
         val numberArray = IntArray(100)
+        for (i in 1..100){
+            numberArray[i] = i
+        }
 
         spinner.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, numberArray.asList())
 
@@ -40,4 +45,30 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+}
+class ArrayAdapter(_context: Context, _array: Array<Int> ): BaseAdapter(){
+    private val context = _context
+    private val array =_array
+
+    override fun getCount(): Int {
+        return array.size
+    }
+
+    override fun getItem(p0: Int): Any {
+        return array[p0]
+    }
+
+    override fun getItemId(p0: Int): Long {
+        return p0.toLong()
+    }
+
+    override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
+
+        val textView = TextView(context)
+        textView.text = array[p0].toString()
+        textView.textSize
+        return textView
+
+    }
+
 }
